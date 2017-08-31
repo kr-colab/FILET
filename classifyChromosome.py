@@ -4,8 +4,8 @@ import random
 from sklearn.externals import joblib
 from sklearn.ensemble import ExtraTreesClassifier
 
-classifierPickleFileName, armDir, outDir = sys.argv[1:]
-desiredFpRate = 0.05
+classifierPickleFileName, armDir, desiredFpRate, outDir = sys.argv[1:]
+desiredFpRate = float(desiredFpRate)
 
 statsToUse, header, grid_search = joblib.load(classifierPickleFileName)
 

@@ -91,8 +91,18 @@ python trainFiletClassifier.py trainingSets/threeClass.fvec classifier/threeClas
 
 # Step 6: Use classifier to produce classifications on the real data set.
 # The first argument is the path to the classifier pickle, the second is the data we wish to
-# classify (described above), and the third is the path where we wish to write our results.
-python classifyChromosome.py classifier/threeClass.p featureVectorsToClassify/ results/
+# classify (described above), the third is a floating point number between zero and one 
+# specifying the critical posterior probability threshold for rejecting the no-migration class,
+# and the fourth is the path where we wish to write our results.
+
+# Note on the second argument: if FILET's predicted posterior probability threshold for the
+# no-migration class is less than probThreshold, then FILET will reject this class and emit as its
+# prediction the more probable of the two migration classes. We often use 0.05 as this value, but
+# selection of this value should be informed by results on an independent simulated test set in
+# order to obtain the desired tradeoff between sensitivity and specificity, as the posterior
+# probabilties estimated by FILET may not be well calibrated. In our experience this is especially
+# so when the training set is very small.
+python classifyChromosome.py classifier/threeClass.p featureVectorsToClassify/ probThreshold results/
 
 # Note about pickles: this pipeline saves our classifier as a "pickle" using scikit-learn's joblib
 # library. Beware that pickles can contain executable python code, so if your pickles are tampered
