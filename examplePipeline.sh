@@ -77,6 +77,9 @@ python trainFiletClassifier.py trainingSets/threeClass.fvec classifier/threeClas
 # and anc.fa should have only one entry). The BED format is described here:
 # https://genome.ucsc.edu/FAQ/FAQformat.html#format1
 #
+# If the user wishes to perform a sliding-window analysis, the user need only ensure that the
+# input BED file contain sets of coordinates with the desired degree of overlap.
+#
 # The normalizePgStats.py script divides all measures of variation that scale with the number of
 # sites (e.g. pi, the number of segregating sites, the number of private alleles) by the number
 # of sites not filtered from the window (the numSites field from pgStatsBedSubpop_forML's output).
