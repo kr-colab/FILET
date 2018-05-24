@@ -174,7 +174,7 @@ void tajdWindow(int nwins, double *posit, double *output, int nsam, int segsites
 double achazThetaExponentWeights(int nsam, int segsites, char **list, int exponent)
 {
         int s, frequency( char, int, int, char**);
-        double thetaA, i, wi, nd, nnm1, wSum ;
+        double thetaA, i, wi, nd, wSum ;
 
         wSum = 0.0 ;
         for ( i = 1; i < nsam; i++){
@@ -186,7 +186,7 @@ double achazThetaExponentWeights(int nsam, int segsites, char **list, int expone
         for( s = 0; s <segsites; s++){
                 nd = sampleSizeSite(s,nsam,list);
                 if (nd > 1){
-                        nnm1 = nd/(nd-1.0);
+                        //nnm1 = nd/(nd-1.0);
                         i = frequency('1', s,nsam,list);
                         wi = pow(i,exponent);
                         thetaA += wi*i;
@@ -200,7 +200,7 @@ double achazThetaExponentWeights(int nsam, int segsites, char **list, int expone
 double achazThetaParabolicWeights(int nsam, int segsites, char **list, int exponent,double center)
 {
         int s, frequency( char, int, int, char**);
-        double thetaA, i, wi, nd, nnm1, wSum ;
+        double thetaA, i, wi, nd, wSum ;
 
         wSum = 0.0 ;
         for ( i = 1; i < nsam; i++){
@@ -212,7 +212,7 @@ double achazThetaParabolicWeights(int nsam, int segsites, char **list, int expon
         for( s = 0; s <segsites; s++){
                 nd = sampleSizeSite(s,nsam,list);
                 if (nd > 1){
-                        nnm1 = nd/(nd-1.0);
+                        //nnm1 = nd/(nd-1.0);
                         i = frequency('1', s,nsam,list);
                         wi = pow((center - i), (double) exponent);
                         thetaA += wi*i;
@@ -227,7 +227,7 @@ double achazThetaParabolicWeights(int nsam, int segsites, char **list, int expon
 double achazThetaHPi(int nsam, int segsites, char **list)
 {
         int s, frequency( char, int, int, char**);
-        double thetaA, i, wi, nd, nnm1, wSum ;
+        double thetaA, i, wi, nd, wSum ;
 
         wSum = 0.0 ;
         for ( i = 1; i < nsam; i++){
@@ -239,7 +239,7 @@ double achazThetaHPi(int nsam, int segsites, char **list)
         for( s = 0; s <segsites; s++){
                 nd = sampleSizeSite(s,nsam,list);
                 if (nd > 1){
-                        nnm1 = nd/(nd-1.0);
+                        //nnm1 = nd/(nd-1.0);
                         i = frequency('1', s,nsam,list);
                         wi = 1/(i*i); //i^2 is tw4
                         thetaA += wi*i;
@@ -254,7 +254,7 @@ double achazThetaHPi(int nsam, int segsites, char **list)
 double achazTajimasDExtreme(int nsam, int segsites, char **list)
 {
         int s, frequency( char, int, int, char**);
-        double pi, upsideDownPi, i, wi1, wi2, nd, nnm1, wSum1, wSum2 ;
+        double pi, upsideDownPi, i, wi1, wi2, nd, wSum1, wSum2 ;
 
         wSum1 = 0.0 ;
         wSum2 = 0.0;
@@ -270,7 +270,7 @@ double achazTajimasDExtreme(int nsam, int segsites, char **list)
         for( s = 0; s <segsites; s++){
                 nd = sampleSizeSite(s,nsam,list);
                 if (nd > 1){
-                        nnm1 = nd/(nd-1.0);
+                        //nnm1 = nd/(nd-1.0);
                         i = frequency('1', s,nsam,list);
                         wi1 = (nsam-i);
                         wi2 = pow(((nsam/2.0)-i),2)/i;
@@ -1663,7 +1663,7 @@ int assignClusters(double *hetVec, int n1, int *g1Size, int *membership1, int *g
 void clusterSeqsFromUnsortedHetVec(double *hetVec, int n1, int *g1Size, int *g2Size, char **list){
 	int *membership1 = (int *) malloc (n1*sizeof(int));
 	int *membership2 = (int *) malloc (n1*sizeof(int));
-	int i, swap, tmp, *tmpArray;
+	int swap, tmp, *tmpArray;
 	swap = assignClusters(hetVec, n1, g1Size, membership1, g2Size, membership2);
 	if (swap)
 	{
