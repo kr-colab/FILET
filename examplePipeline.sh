@@ -30,9 +30,10 @@ mkdir -p trainingSimsStats trainingSets classifier results
 # normalizeTwoPopnStats.py simply takes the output from twoPopnStats_forML and for statistics that
 # scale with window size (e.g. pi, the number of segregating sites, the number of private alleles)
 # the value of the statistic is divided by the number of sites in the window. The script takes
-# two arguments: a file listing the fraction of missing data in each simulation replicate (just
-# use the word None if no masking was performed), and the window size (10 kb in this example).
-# The output is again a tab-separated list of values for each simulation.
+# two arguments: a file that has one line for each simulation replicate in the input. Each line
+# contains only a single number: the fraction of unmasked data (i.e. one minus the fraction of
+# missing data); just use the word None if no masking was performed), and the window size (10 kb
+# in this example). The output is again a tab-separated list of values for each simulation.
 gunzip trainingSims/*.msOut.gz # first we have to unzip the simulation output
 for inFile in `ls trainingSims/ | grep .msOut` ; do cat trainingSims/$inFile | ./twoPopnStats_forML $n1 $n2 | python normalizeTwoPopnStats.py None $windowSize > trainingSimsStats/$inFile; done
 
