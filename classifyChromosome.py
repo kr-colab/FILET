@@ -23,6 +23,8 @@ def probsToPreds(probs, desiredFpRate):
             preds.append("1")
         elif prob[2] > prob[1]:
             preds.append("2")
+        else:
+            preds.append("-1")
     return np.array(preds)
 
 def writePreds(predictions, probs, coords, outFileName):
