@@ -106,6 +106,9 @@ python trainFiletClassifier.py trainingSets/threeClass.fvec classifier/threeClas
 # order to obtain the desired tradeoff between sensitivity and specificity, as the posterior
 # probabilties estimated by FILET may not be well calibrated. In our experience this is especially
 # so when the training set is very small.
+# Note: If we reject the no introgression class and our two introgression classes happen to have
+# equal posterior probability, then we will emit class "-1" which you can think of as introgression
+# of perfectly ambiguous direction. This should be rare.
 python classifyChromosome.py classifier/threeClass.p featureVectorsToClassify/ probThreshold results/
 
 # Note about pickles: this pipeline saves our classifier as a "pickle" using scikit-learn's joblib
