@@ -17,7 +17,7 @@ while line:
             elif line[i] == "numSites":
                 numSitesCol = i
         first = False
-        print "\t".join(line)
+        print("\t".join(line))
     else:
         outLine = []
         numSites = float(line[numSitesCol])
@@ -32,5 +32,5 @@ while line:
                     outLine.append("%f" %(float(line[i])/numSites**2))
                 else:
                     outLine.append(line[i])
-            print "\t".join(outLine)
+            print("\t".join(outLine))
     line = sys.stdin.readline()

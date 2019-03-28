@@ -5,7 +5,7 @@ import random
 from sklearn.ensemble import ExtraTreesClassifier
 from time import time
 from operator import itemgetter
-from sklearn.grid_search import GridSearchCV
+from sklearn.model_selection import GridSearchCV
 
 trainingSetFileName, classifierPickleFileName = sys.argv[1:3]
 statsToUse = sys.argv[3:]
@@ -35,7 +35,7 @@ with open(trainingSetFileName) as trainingSetFile:
                     isBad = True
                 instance.append(float(line[i]))
             if not isBad:
-                if not XH.has_key(line[0]):
+                if not line[0] in XH:
                     XH[line[0]] = []
                 XH[line[0]].append(instance)
 
@@ -52,26 +52,26 @@ X = np.array(X)
 sys.stderr.write("training set size after balancing: %s\n" %(len(y)))
 
 # Utility function to report best scores
-def report(grid_scores, n_top=3):
-    top_scores = sorted(grid_scores, key=itemgetter(1), reverse=True)[:n_top]
-    for i, score in enumerate(top_scores):
-        print("Model with rank: {0}".format(i + 1))
-        print("Mean validation score: {0:.3f} (std: {1:.3f})".format(
-              score.mean_validation_score,
-              np.std(score.cv_validation_scores)))
-        print("Parameters: {0}".format(score.parameters))
-        print("")
-
+def report(results, n_top=3):
+    for i in range(1, n_top + 1):
+        candidates = np.flatnonzero(results['rank_test_score'] == i)
+        for candidate in candidates:
+            print("Model with rank: {0}".format(i))
+            print("Mean validation score: {0:.3f} (std: {1:.3f})".format(
+                  results['mean_test_score'][candidate],
+                  results['std_test_score'][candidate]))
+            print("Parameters: {0}".format(results['params'][candidate]))
+            print("")
 
 sys.stderr.write("Checking accuracy when distinguishing among all %s classes\n" %(len(XH.keys())))
 
 maxMaxFeatures=len(X[0])
-param_grid_forest = {"max_depth": [3, 10, None],
-              "max_features": [1, 3, int(maxMaxFeatures**0.5), maxMaxFeatures],
-              "min_samples_split": [1, 3, 10],
-              "min_samples_leaf": [1, 3, 10],
+param_grid_forest = {"max_depth": [10, None],
+              "max_features": [int(maxMaxFeatures**0.5), maxMaxFeatures],
+              "min_samples_split": [3, 10],
+              "min_samples_leaf": [3, 10],
               "bootstrap": [True, False],
-              "criterion": ["gini", "entropy"]}
+              "criterion": ["gini"]}
 
 clf, mlType, paramGrid = ExtraTreesClassifier(n_estimators=100, random_state=0), "extraTreesClassifier", param_grid_forest
 
@@ -80,7 +80,7 @@ grid_search = GridSearchCV(clf,param_grid=param_grid_forest,cv=10,n_jobs=10)
 start = time()
 grid_search.fit(X, y)
 sys.stderr.write("GridSearchCV took %.2f seconds for %d candidate parameter settings.\n"
-      % (time() - start, len(grid_search.grid_scores_)))
-print "Results for %s" %(mlType)
-report(grid_search.grid_scores_)
+      % (time() - start, len(grid_search.cv_results_)))
+print("Results for %s" %(mlType))
+report(grid_search.cv_results_)
 joblib.dump((statsToUse, header, grid_search), classifierPickleFileName)
