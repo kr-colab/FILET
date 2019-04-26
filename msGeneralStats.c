@@ -2139,7 +2139,7 @@ double seqDist_Snn(int segsites, int index1,  int index2, char **list){
 	for(i = 0; i < segsites; i++){
 		c1 = list[index1][i];
 		c2 = list[index2][i];
-		if(c1 == 'N' || c1 == 'N'){
+		if(c1 == 'N' || c2 == 'N'){
 			nCount += 1; //uncertainty about states?
 		}
 		else{
