@@ -109,7 +109,20 @@ python trainFiletClassifier.py trainingSets/threeClass.fvec classifier/threeClas
 # Note: If we reject the no introgression class and our two introgression classes happen to have
 # equal posterior probability, then we will emit class "-1" which you can think of as introgression
 # of perfectly ambiguous direction. This should be rare.
-python classifyChromosome.py classifier/threeClass.p featureVectorsToClassify/ probThreshold results/
+# python classifyChromosome.py classifier/threeClass.p featureVectorsToClassify/ probThreshold results/
+
+# Output format:
+# 1. Chromosome
+# 2. Starting coordinate of the classified window
+# 3. Ending coordinate
+# 4. The number of sites in the window that are not 'N' across the entire sample (treating this as our number of informative sites)
+# 5. The class label of the chosen class
+# 6. The posterior probability of class zero
+# 7. The posterior probability of class one
+# 8. The posterior probability of class two
+
+# Class 0 means no introgression. Class 1 is introgression from population 2 into population 1, and class 2 
+# is introgression from population 2 into population 1. (Class -1 is described above.)
 
 # Note about pickles: this pipeline saves our classifier as a "pickle" using scikit-learn's joblib
 # library. Beware that pickles can contain executable python code, so if your pickles are tampered
