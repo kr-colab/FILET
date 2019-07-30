@@ -1,3 +1,9 @@
+"""
+Compute feature rankings for a trained classifier saved in a joblib
+usage: python getFeatureRankings.py pathToClassifier
+where pathToClassifier points to the .p file that was created by running the training script 
+"""
+
 import sys, os
 import numpy as np
 import random
