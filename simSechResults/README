@@ -12,4 +12,6 @@ Note: these analyses were performed on the March 2012 version of the D. simulans
 
 intro_regions_clustered_flybase2.02.bed: This BED file contains the coordinates of our clustered introgressed regions in the coordinate space FlyBase v. 2.02 release of the simulans assembly. This was done via BLAT and was fairly trivial, as a comparison of this file with intro_regions_clustered_genes.bed reveals that the coordinates for each cluster are just shifted slightly. Note that the .preds files have not been lifted over the same manner, and our still in the coordinate space of the March 2012 assembly.
 
+dsimV2-Mar2012_chrsonly.fa: This is the March 2012 assembly that we used in this analysis. One can map coordinates from the current FlyBase assembly to this one via BLAST searh (unfortunately no liftOver files exist for this comparison).
+
 dsimV2-genes-mod.tsv: This is the original gene annotation to go along with the March 2012 assembly, and was therefore used for all of our analyses. This file would be required to reproduce our results from our simulans/sechellia manuscript but should not be used for any analysis with newer assembly versions. The current assembly and annotation can be found on FlyBase.org.
