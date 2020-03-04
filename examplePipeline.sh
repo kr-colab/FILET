@@ -59,7 +59,7 @@ python buildThreeClassTrainingSet.py trainingSimsStats/ trainingSets/threeClass.
 # been masked in the same manner as the data the user wishes to classify.
 python trainFiletClassifier.py trainingSets/threeClass.fvec classifier/threeClass.p pi1 hetVar1 ss1 private1 tajd1 ZnS1 pi2 hetVar2 ss2 private2 tajd2 ZnS2 Fst snn dxy_mean dxy_min gmin zx dd1 dd2 ddRank1 ddRank2
 
-# Stpe 5: Meanwhile, we need some data to classify. The program pgStatsBedSubpop_forML does this
+# Step 5: Meanwhile, we need some data to classify. The program pgStatsBedSubpop_forML does this
 # for us. The arguments, in order, are the phased sequence data for population/species 1 in our 
 # region or chromosome of interest (in fasta format), the same for population 2, a fasta file
 # with one entry representing the inferred ancestral state for each position in our region
