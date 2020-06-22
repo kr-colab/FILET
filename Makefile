@@ -2,7 +2,10 @@ CC = gcc
 CFLAGS = -O3 -Wall -lm -lgsl -lgslcblas
 BASICS = miscCode/stringWrap.c miscCode/sequenceMatrix.c pgSummaryStats.c miscCode/vector.c miscCode/numerical.c miscCode/nrutil.c miscCode/bedFile.c
 
-all: twoPopnStats_forML pgStatsBedSubpop_forML
+all: twoPopnStats_forML pgStatsBedSubpop_forML msMaskAllRows
+
+msMaskAllRows:	msMaskAllRows.c
+		$(CC) msMaskAllRows.c -o msMaskAllRows $(CFLAGS)
 
 twoPopnStats_forML:	twoPopnStats_forML.c msGeneralStats.c
 		$(CC) twoPopnStats_forML.c msGeneralStats.c -o twoPopnStats_forML $(CFLAGS)
